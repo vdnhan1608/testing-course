@@ -1,0 +1,15 @@
+﻿Partition tested,Address street 1,Address street 2,City,State/Province,Zip/Postal Code,Country,Home Telephone,Mobile,Work Telephone,Work Email,Other Email,Expected
+Error when Home telephone contains letters,,,,,,,abc,(+84) 48512,(+84) 48512,bao@gmail.com,huynh@gmail.com,Error message
+Error when Home telephon contains prohibited special characters,,,,,,,+84 {1155},(+84) 48512,(+84) 48512,bao@gmail.com,huynh@gmail.com,Error message
+Success when Home telephone is empty,,,,,,,,(+84) 48512,(+84) 48512,bao@gmail.com,huynh@gmail.com,Accepted
+Error when Mobile contains letters,,,,,,,(+84) 48512,abc,(+84) 48512,bao@gmail.com,huynh@gmail.com,Error message
+Error when Mobile contains prohibited special characters,,,,,,,(+84) 48512,+84 {1155},(+84) 48512,bao@gmail.com,huynh@gmail.com,Error message
+Success when Mobile telephone is empty,,,,,,,(+84) 48512,,(+84) 48512,bao@gmail.com,huynh@gmail.com,Accepted
+Error when Work telephone contains letters,,,,,,,(+84) 48512,(+84) 48512,abc,bao@gmail.com,huynh@gmail.com,Error message
+Error when Work telephon contains prohibited special characters,,,,,,,(+84) 48512,(+84) 48512,+84 {1155},bao@gmail.com,huynh@gmail.com,Error message
+Success when Work telephone is empty,,,,,,,(+84) 48512,(+84) 48512,,bao@gmail.com,huynh@gmail.com,Accepted
+Success when Work email is empty,,,,,,,(+84) 48512,(+84) 48512,(+84) 48512,,huynh@gmail.com,Accepted
+Error when Work email in wrong format,,,,,,,(+84) 48512,(+84) 48512,(+84) 48512,temp.gmail.com,huynh@gmail.com,Error message
+Success when Other email is empty,,,,,,,(+84) 48512,(+84) 48512,(+84) 48512,bao@gmail.com,,Accepted
+Error when Other email in wrong format,,,,,,,(+84) 48512,(+84) 48512,(+84) 48512,bao@gmail.com,temp.gmail.com,Error message
+Successfully edit Contact details,,,,,,,(+84) 48512,(+84) 48512,(+84) 48512,bao@gmail.com,huynh@gmail.com,Accepted
