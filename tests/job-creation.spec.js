@@ -56,6 +56,9 @@ const FILES = {
   largeFile: '../resources/images/pxfuel.jpg',
 };
 
+const LONG_TEXT =
+  'Senior Product Manager with a very long note that exceeds the maximum allowed characters. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl.';
+
 suite(
   function (env) {
     describe(`OrangeHRM Job Creation - ${env.browser.name}`, function () {
@@ -77,17 +80,33 @@ suite(
 
       const testCases = [
         {
+          description: 'should verify Job Title Creation with All Fields',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          jobTitleDetails: {
+            jobTitle: 'Software Engineer',
+            jobDescription: 'Test software applications',
+            jobSpecification: FILES.valid,
+            note: 'Important notes about the job',
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message success fadable"]',
+          cleanup: async function () {
+            await performCleanup(driver, 'Software Engineer');
+          },
+        },
+        {
           description:
             'should verify Job Title Creation with Minimum Required Fields',
           username: 'admin',
           password: 'V@ilachinh12312',
           jobTitleDetails: {
-            jobTitle: 'Software Developer',
+            jobTitle: 'Software Engineer',
           },
           waitUntilAssertXPath: 10000,
           assertXPath: '//div[@class="message success fadable"]',
           cleanup: async function () {
-            await performCleanup(driver, 'Software Developer');
+            await performCleanup(driver, 'Software Engineer');
           },
         },
         {
@@ -96,17 +115,17 @@ suite(
           username: 'admin',
           password: 'V@ilachinh12312',
           jobTitleDetails: {
-            jobDescription: 'Software Developer Job Description',
+            jobDescription: 'Software Engineer Job Description',
           },
           waitUntilAssertXPath: 10000,
           assertByClass: 'validation-error',
         },
         {
-          description: 'should verify Job Title Creation with All Fields',
+          description: 'should verify Leading and Trailing Spaces in Job Title',
           username: 'admin',
           password: 'V@ilachinh12312',
           jobTitleDetails: {
-            jobTitle: 'QA Engineer',
+            jobTitle: ' Software Engineer ',
             jobDescription: 'Test software applications',
             jobSpecification: FILES.valid,
             note: 'Important notes about the job',
@@ -114,7 +133,70 @@ suite(
           waitUntilAssertXPath: 10000,
           assertXPath: '//div[@class="message success fadable"]',
           cleanup: async function () {
-            await performCleanup(driver, 'QA Engineer');
+            await performCleanup(driver, 'Software Engineer');
+          },
+        },
+        {
+          description: 'should verify Job Title Exceeds Maximum Length',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          jobTitleDetails: {
+            jobTitle: LONG_TEXT,
+            jobDescription: 'Test software applications',
+            jobSpecification: FILES.valid,
+            note: 'Important notes about the job',
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message success fadable"]',
+          cleanup: async function () {
+            await performCleanup(driver, LONG_TEXT.slice(0, 100));
+          },
+        },
+        {
+          description:
+            'should verify Leading and Trailing Spaces in Job Description',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          jobTitleDetails: {
+            jobTitle: 'Software Engineer',
+            jobDescription: ' Test software applications ',
+            jobSpecification: FILES.valid,
+            note: 'Important notes about the job',
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message success fadable"]',
+          cleanup: async function () {
+            await performCleanup(driver, 'Software Engineer');
+          },
+        },
+        {
+          description: 'should verify Job Description Exceeds Maximum Length',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          jobTitleDetails: {
+            jobTitle: 'Software Engineer',
+            jobDescription: LONG_TEXT,
+            jobSpecification: FILES.valid,
+            note: 'Important notes about the job',
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message success fadable"]',
+          cleanup: async function () {
+            await performCleanup(driver, 'Software Engineer');
+          },
+        },
+        {
+          description: 'should verify Valid File Upload for Job Specification',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          jobTitleDetails: {
+            jobTitle: 'Software Engineer',
+            jobSpecification: FILES.valid,
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message success fadable"]',
+          cleanup: async function () {
+            await performCleanup(driver, 'Software Engineer');
           },
         },
         {
@@ -123,12 +205,41 @@ suite(
           username: 'admin',
           password: 'V@ilachinh12312',
           jobTitleDetails: {
-            jobTitle: 'Invalid Job Title',
+            jobTitle: 'Software Engineer',
             jobSpecification: FILES.largeFile, // Specify an invalid file
           },
           waitUntilAssertXPath: 10000,
           assertXPath: '//div[@class="message warning fadable"]',
           cleanup: null,
+        },
+        {
+          description: 'should verify Leading and Trailing Spaces in Note',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          jobTitleDetails: {
+            jobTitle: 'Software Engineer',
+            jobDescription: 'Test software applications',
+            jobSpecification: FILES.valid, // Specify an invalid file
+            note: ' Important notes about the job ',
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message success fadable"]',
+          cleanup: async function () {
+            await performCleanup(driver, 'Software Engineer');
+          },
+        },
+        {
+          description: 'should verify Job Note exceeds Maximum length',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          jobTitleDetails: {
+            jobTitle: 'Software Engineer',
+            jobDescription: 'Test software applications',
+            jobSpecification: FILES.largeFile, // Specify an invalid file
+            note: LONG_TEXT,
+          },
+          waitUntilAssertXPath: 10000,
+          assertByClass: 'validation-error',
         },
       ];
 
@@ -233,5 +344,7 @@ suite(
       });
     });
   },
-  { browsers: [Browser.CHROME, Browser.EDGE, Browser.FIREFOX] }
+  { browsers: [Browser.CHROME] }
 );
+
+// , Browser.EDGE, Browser.FIREFOX

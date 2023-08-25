@@ -1,0 +1,9 @@
+﻿Partition tested,Job title,Vacancy name,Hiring Manager,No of positions,Description,Expected,Actual
+Error shown when Job title is empty,,New Hire,Bao Quoc Huynh,2,NULL,Error message,Required
+Error shown when Vacancy name is empty,QA,,Bao Quoc Huynh,2,NULL,Error message,Required
+Error shown when Hiring manager is empty,QA,New Hire,,2,NULL,Error message,Invalid
+Error shown when No of position cantains letters,QA,New Hire,Bao Quoc Huynh,ab,NULL,Error message,Should be a positive number
+Error shown when No of position is negative,QA,New Hire,Bao Quoc Huynh,-1,NULL,Error message,Should be a positive number
+Success when No of positions at min: 0,QA,New Hire,Bao Quoc Huynh,0,NULL,Accepted,Accepted
+Success when No of positions at max: 99,QA,New Hire,Bao Quoc Huynh,99,NULL,Accepted,Accepted
+Success when when parameter within range,QA,New Hire,Bao Quoc Huynh,10,NULL,Accepted,Accepted

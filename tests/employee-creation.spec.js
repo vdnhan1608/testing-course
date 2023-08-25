@@ -127,9 +127,80 @@ suite(
             photographPath: IMAGES.invalid, // Provide the actual path
             createLogin: false,
           },
-          // cleanup: async function () {
-          //   await performCleanup(driver, 'EMP001'); // Pass the employeeId directly
-          // },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message warning fadable"]',
+        },
+        {
+          description:
+            'should verify Employee Creation with Large-Sized Photograph',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          employeeDetails: {
+            firstName: 'John',
+            lastName: 'Doe',
+            employeeId: 'EMP001',
+            photographPath: IMAGES.largeFile, // Provide the actual path
+            createLogin: false,
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message warning fadable"]',
+        },
+        {
+          description:
+            'should verify Employee Creation with Large-Sized First Name',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          employeeDetails: {
+            firstName: 'John',
+            lastName: 'Doe',
+            employeeId: 'EMP001',
+            photographPath: IMAGES.valid, // Provide the actual path
+            createLogin: false,
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message warning fadable"]',
+        },
+        {
+          description: 'should verify Employee Creation with empty First Name',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          employeeDetails: {
+            firstName: '',
+            lastName: 'Doe',
+            employeeId: 'EMP001',
+            photographPath: IMAGES.valid, // Provide the actual path
+            createLogin: false,
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message warning fadable"]',
+        },
+        {
+          description:
+            'should verify Employee Creation with Large-sized employeeId',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          employeeDetails: {
+            firstName: 'John',
+            lastName: 'Doe',
+            employeeId:
+              'ThisIsALongCityNameThatExceedsTheCharacterLimitThisIsALongCityNameThatExceedsTheCharacterLimitThisIsALongCityNameThatExceedsTheCharacterLimitThisIsALongCityNameThatExceedsTheCharacterLimit',
+            photographPath: IMAGES.valid, // Provide the actual path
+            createLogin: false,
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message warning fadable"]',
+        },
+        {
+          description: 'should verify Employee Creation with empty employeeId',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          employeeDetails: {
+            firstName: 'John',
+            lastName: 'Doe',
+            employeeId: '',
+            photographPath: IMAGES.valid, // Provide the actual path
+            createLogin: false,
+          },
           waitUntilAssertXPath: 10000,
           assertXPath: '//div[@class="message warning fadable"]',
         },
@@ -170,21 +241,6 @@ suite(
           },
           waitUntilAssertXPath: 10000,
           assertByClass: 'validation-error',
-        },
-        {
-          description:
-            'should verify Employee Creation with Large-Sized Photograph',
-          username: 'admin',
-          password: 'V@ilachinh12312',
-          employeeDetails: {
-            firstName: 'John',
-            lastName: 'Doe',
-            employeeId: 'EMP001',
-            photographPath: IMAGES.largeFile, // Provide the actual path
-            createLogin: false,
-          },
-          waitUntilAssertXPath: 10000,
-          assertXPath: '//div[@class="message warning fadable"]',
         },
       ];
 

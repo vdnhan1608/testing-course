@@ -1,0 +1,12 @@
+﻿Partition tested,First name,Middle name,Last name,Email,Contact no,Job vacancy,Resume,Keyword,Comment,Date of application,Expected
+Error when First name is empty,,,Huynh,hqb@gmail.com,(+84) 48512,Temp Intern,,,,2023-07-11,Error message
+Error when Last name is empty,Bao,,,hqb@gmail.com,(+84) 48512,Temp Intern,,,,2023-07-11,Error message
+Error when Email is empty,Bao,,Huynh,,(+84) 48512,Temp Intern,,,,2023-07-11,Error message
+Error when Email in  wrong,Bao,,Huynh,hqb,(+84) 48512,Temp Intern,,,,2023-07-11,Error message
+Error when Contact no. contains letters,Bao,,Huynh,hqb@gmail.com,abc,Temp Intern,,,,2023-07-11,Error message
+Error when Contact no. contains prohibited special characters,Bao,,Huynh,hqb@gmail.com,+44 {445,Temp Intern,,,,2023-07-11,Error message
+Success when Contact no. is empty,Bao,,Huynh,hqb@gmail.com,,Temp Intern,,,,2023-07-11,Accepted
+Success when Job vacancy is empty,Bao,,Huynh,hqb@gmail.com,(+84) 48512,,,,,2023-07-11,Accepted
+Error when Date of application in wrong format,Bao,,Huynh,hqb@gmail.com,(+84) 48512,Temp Intern,,,,11-07-2023,Error message
+Success when Date of application is empty,Bao,,Huynh,hqb@gmail.com,(+84) 48512,Temp Intern,,,,,Accepted
+Successfully add candidates,Bao,,Huynh,hqb@gmail.com,(+84) 48512,Temp Intern,,,,2023-07-11,Accepted
