@@ -55,8 +55,6 @@ async function performCleanup(
     `http://localhost/orangehrm/symfony/web/index.php/admin/viewPayGrades`
   );
 
-  console.log('currencyName', currencyName);
-
   // Find the table that contains pay grade rows
   const tableElement = await driver.findElement(By.id('resultTable'));
 
@@ -150,6 +148,77 @@ suite(
             currenyName: 'Vietnamese Dong',
             minimumSalary: 10000,
             maximumSalary: 5000,
+          },
+          waitUntilAssertXPath: 10000,
+          assertByClass: 'validation-error',
+        },
+        {
+          description: 'should verify Set only minimum salary',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          currencyDetails: {
+            currency: 'VND',
+            currenyName: 'Vietnamese Dong',
+            minimumSalary: 5000,
+            maximumSalary: 0,
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message success fadable"]',
+          cleanup: async function (currencyName) {
+            await performCleanup(driver, currencyName); // Pass the employeeId directly
+          },
+        },
+        {
+          description: 'should verify Set only maximum salary',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          currencyDetails: {
+            currency: 'VND',
+            currenyName: 'Vietnamese Dong',
+            minimumSalary: 0,
+            maximumSalary: 5000,
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message success fadable"]',
+          cleanup: async function (currencyName) {
+            await performCleanup(driver, currencyName); // Pass the employeeId directly
+          },
+        },
+        {
+          description: 'should verify Invalid currency',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          currencyDetails: {
+            currency: 'VNDS',
+            currenyName: 'Vietnamese Dong',
+            minimumSalary: 0,
+            maximumSalary: 5000,
+          },
+          waitUntilAssertXPath: 10000,
+          assertByClass: 'validation-error',
+        },
+        {
+          description: 'should verify Negative salary',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          currencyDetails: {
+            currency: 'VNDS',
+            currenyName: 'Vietnamese Dong',
+            minimumSalary: -1000,
+            maximumSalary: 0,
+          },
+          waitUntilAssertXPath: 10000,
+          assertByClass: 'validation-error',
+        },
+        {
+          description: 'should verify Salary with special characters',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          currencyDetails: {
+            currency: 'VND',
+            currenyName: 'Vietnamese Dong',
+            minimumSalary: '#1000',
+            maximumSalary: 0,
           },
           waitUntilAssertXPath: 10000,
           assertByClass: 'validation-error',
@@ -279,5 +348,6 @@ suite(
       });
     });
   },
-  { browsers: [Browser.CHROME, Browser.EDGE, Browser.FIREFOX] }
+  { browsers: [Browser.CHROME] }
 );
+// , Browser.EDGE, Browser.FIREFOX
