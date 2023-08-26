@@ -344,7 +344,8 @@ suite(
       });
     });
   },
-  { browsers: [Browser.CHROME] }
+  { browsers: [Browser.CHROME, Browser.EDGE, Browser.FIREFOX] }
 );
 
 // , Browser.EDGE, Browser.FIREFOX
+// Browser.CHROME

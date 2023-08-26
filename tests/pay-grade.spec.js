@@ -1,4 +1,4 @@
-const { By, Key, until, Browser } = require('selenium-webdriver');
+const { By, Key, until, Browser, Builder } = require('selenium-webdriver');
 const assert = require('assert');
 const { suite } = require('selenium-webdriver/testing');
 
@@ -348,6 +348,6 @@ suite(
       });
     });
   },
-  { browsers: [Browser.CHROME] }
+  { browsers: [Browser.CHROME, Browser.EDGE, Browser.FIREFOX] }
 );
-// , Browser.EDGE, Browser.FIREFOX
+// Browser.CHROME, Browser.EDGE, Browser.FIREFOX
