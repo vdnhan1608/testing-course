@@ -5,9 +5,9 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "mocha tests/*.spec.js",
-		"test:configuration": "mocha tests1/configuration.spec.js",
-		"test:performance": "mocha performance_at/performance.configure.kpi.spec.js",
-		"test:review": "mocha admin_review_at/admin.review.spec.js",
+		"test:configuration": "mocha tests/configuration.spec.js",
+		"test:performance": "mocha tests/performance.configure.kpi.spec.js",
+		"test:review": "mocha tests/admin.review.spec.js",
 		"test:nhan": "mocha tests/performance.configure.kpi.spec.js tests/admin.review.spec.js tests/configuration.spec.js"
 	},
 	"dependencies": {

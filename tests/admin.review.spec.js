@@ -158,7 +158,7 @@ for (let webDriver of webDrivers) {
 	// This is for web driver chrome
 	describe(`Manage Review for ${webDriver}:`, function () {
 		let driver;
-		this.timeout(100000);
+		this.timeout(20000);
 		// Build the web driver
 		// TODO: Modify to run on different browser
 		before(async function () {
@@ -225,7 +225,7 @@ for (let webDriver of webDrivers) {
 						By.id('saveReview360Form_employee')
 					);
 
-					await employee.sendKeys('Vo Duy Nhan');
+					await employee.sendKeys('Võ Duy Nhân'); // Võ Duy Nhân default
 					await employee.sendKeys(Key.ARROW_DOWN);
 					await employee.sendKeys(Key.ENTER);
 
@@ -244,7 +244,7 @@ for (let webDriver of webDrivers) {
 					await driver.wait(until.elementIsVisible(supervisor), 10000);
 
 					// await supervisor.click();
-					await supervisor.sendKeys('IT Admin');
+					await supervisor.sendKeys('IT Head');
 
 					await driver.sleep(2000); // Wait 2 seconds in case
 					// the autocomplete pop up
