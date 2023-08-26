@@ -1,4 +1,4 @@
-const { By, Key, until, Browser } = require('selenium-webdriver');
+const { By, Key, until, Browser, Builder } = require('selenium-webdriver');
 const assert = require('assert');
 const { suite } = require('selenium-webdriver/testing');
 const path = require('path');
@@ -54,6 +54,9 @@ const IMAGES = {
   invalid: '../resources/images/invalid.bmp',
   largeFile: '../resources/images/pxfuel.jpg',
 };
+
+const LONG_TEXT =
+  'Senior Product Manager with a very long note that exceeds the maximum allowed characters. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl. Nulla euismod, nisl quis tincidunt ultricies, nisl nisl aliquet nisl, quis aliquam nisl nisl quis nisl.';
 
 suite(
   function (env) {
@@ -127,11 +130,90 @@ suite(
             photographPath: IMAGES.invalid, // Provide the actual path
             createLogin: false,
           },
-          // cleanup: async function () {
-          //   await performCleanup(driver, 'EMP001'); // Pass the employeeId directly
-          // },
           waitUntilAssertXPath: 10000,
           assertXPath: '//div[@class="message warning fadable"]',
+        },
+        {
+          description:
+            'should verify Employee Creation with Large-Sized Photograph',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          employeeDetails: {
+            firstName: 'John',
+            lastName: 'Doe',
+            employeeId: 'EMP001',
+            photographPath: IMAGES.largeFile, // Provide the actual path
+            createLogin: false,
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@class="message warning fadable"]',
+        },
+        {
+          description:
+            'should verify Employee Creation with Large-Sized First Name',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          employeeDetails: {
+            firstName: LONG_TEXT,
+            lastName: 'Doe',
+            employeeId: 'EMP001',
+            photographPath: IMAGES.valid, // Provide the actual path
+            createLogin: false,
+          },
+          assertXPath: '//div[@id="profile-pic"]',
+          waitUntilAssertXPath: 10000,
+          cleanup: async function () {
+            await performCleanup(driver, 'EMP001'); // Pass the employeeId directly
+          },
+        },
+        {
+          description: 'should verify Employee Creation with empty First Name',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          employeeDetails: {
+            firstName: '',
+            lastName: 'Doe',
+            employeeId: 'EMP001',
+            photographPath: IMAGES.valid, // Provide the actual path
+            createLogin: false,
+          },
+          waitUntilAssertXPath: 10000,
+          assertByClass: 'validation-error',
+        },
+        {
+          description:
+            'should verify Employee Creation with Large-sized employeeId',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          employeeDetails: {
+            firstName: 'John',
+            lastName: 'Doe',
+            employeeId: LONG_TEXT,
+            photographPath: IMAGES.valid, // Provide the actual path
+            createLogin: false,
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@id="profile-pic"]',
+          cleanup: async function () {
+            await performCleanup(driver, LONG_TEXT.slice(0, 10)); // Pass the employeeId directly
+          },
+        },
+        {
+          description: 'should verify Employee Creation with empty employeeId',
+          username: 'admin',
+          password: 'V@ilachinh12312',
+          employeeDetails: {
+            firstName: 'John',
+            lastName: 'Doe',
+            employeeId: '',
+            photographPath: IMAGES.valid, // Provide the actual path
+            createLogin: false,
+          },
+          waitUntilAssertXPath: 10000,
+          assertXPath: '//div[@id="profile-pic"]',
+          cleanup: async function () {
+            await performCleanup(driver, ''); // Pass the employeeId directly
+          },
         },
         {
           description: 'should verify Employee Creation with Weak Password',
@@ -170,21 +252,6 @@ suite(
           },
           waitUntilAssertXPath: 10000,
           assertByClass: 'validation-error',
-        },
-        {
-          description:
-            'should verify Employee Creation with Large-Sized Photograph',
-          username: 'admin',
-          password: 'V@ilachinh12312',
-          employeeDetails: {
-            firstName: 'John',
-            lastName: 'Doe',
-            employeeId: 'EMP001',
-            photographPath: IMAGES.largeFile, // Provide the actual path
-            createLogin: false,
-          },
-          waitUntilAssertXPath: 10000,
-          assertXPath: '//div[@class="message warning fadable"]',
         },
       ];
 
